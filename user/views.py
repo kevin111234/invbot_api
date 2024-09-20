@@ -2,17 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import ApiKeyForm
+from .forms import ApiKeyForm, CustomUserCreationForm
 
 def signup_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
 def login_view(request):
@@ -30,7 +30,8 @@ def login_view(request):
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
-        return redirect('home')
+        return redirect('home')  # 로그아웃 후 홈으로 리디렉션
+    return render(request, 'logout.html')
 
 @login_required
 def api_key_register_view(request):

@@ -41,4 +41,4 @@ def api_key_register_view(request):
             return redirect('home')  # 등록 후 홈으로 이동
     else:
         form = ApiKeyForm()
-    return render(request, 'accounts/api_key_register.html', {'form': form})
+    return render(request, 'api_key_register.html', {'form': form})

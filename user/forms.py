@@ -35,3 +35,11 @@ class CustomUserCreationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+from django import forms
+from .models import UserProfile
+
+class OpenAIKeyForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['openai_api_key']

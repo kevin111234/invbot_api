@@ -7,4 +7,5 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
 
     path('api-key/register/', views.api_key_register_view, name='api_key_register'),
+    path('update_openai_key/', views.update_openai_key, name='update_openai_key'),
 ]

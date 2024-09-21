@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import ApiKeyForm, CustomUserCreationForm
+from .forms import OpenAIKeyForm
 
 def signup_view(request):
     if request.method == 'POST':
@@ -43,3 +44,15 @@ def api_key_register_view(request):
     else:
         form = ApiKeyForm()
     return render(request, 'api_key_register.html', {'form': form})
+
+@login_required
+def update_openai_key(request):
+    user_profile = request.user.userprofile
+    if request.method == 'POST':
+        form = OpenAIKeyForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # 프로필 페이지로 리다이렉트
+    else:
+        form = OpenAIKeyForm(instance=user_profile)
+    return render(request, 'update_openai_key.html', {'form': form})

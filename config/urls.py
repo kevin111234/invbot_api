@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name='home'), 
     path('accounts/', include('user.urls')),
+    path('btc/', include('BTC_AutoTrade.urls')),
 ]

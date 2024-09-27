@@ -1,0 +1,7 @@
+Django>=3.2
+celery
+redis
+numpy
+pandas
+pyupbit
+python-dotenv
